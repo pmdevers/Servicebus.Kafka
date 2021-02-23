@@ -11,7 +11,7 @@ namespace WorkerService.Handles
    {
       public void Handle(UserUpdated @event)
       {
-         Debug.WriteLine("UpdateUser: " + @event.Name);
+         Console.WriteLine("UpdateUser: " + @event.Name);
       }
    }
 }

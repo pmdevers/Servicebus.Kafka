@@ -20,8 +20,8 @@ namespace Servicebus.Kafka
    {
       private readonly IServiceProvider _serviceProvider;
       private readonly IServiceCollection _services;
-      private ConsumerConfig _consumerConfig;
-      private SchemaRegistryConfig _schemaRegistryConfig;
+      private readonly ConsumerConfig _consumerConfig;
+      private readonly SchemaRegistryConfig _schemaRegistryConfig;
 
       public TopicConsumer(IServiceProvider serviceProvider, IServiceCollection services)
       {
@@ -59,6 +59,8 @@ namespace Servicebus.Kafka
                      var bytes = await serializer.SerializeAsync(cr.Message.Value, new SerializationContext());
                      var handler = (IAvroEventHandler) _serviceProvider.GetService(typeof(AvroEventHandler<>).MakeGenericType(type));
                      await handler.Handle(bytes, schemaRegistry, token);
+
+                     consumer.Commit(cr);
                   }
                }
                catch (ConsumeException ex)
@@ -73,13 +75,14 @@ namespace Servicebus.Kafka
       }
 
 
-      private IEnumerable<Type> GetTypes(string topic)
+      private List<Type> GetTypes(string topic)
       {
          return _services.Where(s =>
                s.ServiceType.IsGenericType &&
                s.ServiceType.GetGenericTypeDefinition() == typeof(IEventHandler<>))
             .Select(s => s.ServiceType.GetGenericArguments()[0])
-            .Where(x => x.GetCustomAttribute<KafkaTopic>().TopicName == topic);
+            .Where(x => x.GetCustomAttribute<KafkaTopic>().TopicName == topic)
+            .ToList();
       }
    }
 }

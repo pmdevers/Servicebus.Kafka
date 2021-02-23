@@ -1,0 +1,8 @@
+﻿{
+   "namespace": "WorkerService.Events",
+   "type": "record",
+   "name": "UserUpdated",
+   "fields": [
+      { "name": "Name", "type": "string" }
+   ]
+}

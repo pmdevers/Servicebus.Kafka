@@ -2,15 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-    <UserSecretsId>dotnet-WorkerService-E1926705-8E22-4355-B576-1C63BB5C14E9</UserSecretsId>
+    <UserSecretsId>dotnet-WorkerProducer-CDA3822A-F6BC-4E74-AB24-F35BDB2AF172</UserSecretsId>
   </PropertyGroup>
-
-  <ItemGroup>
-    <Compile Remove="WorkerService\**" />
-    <Content Remove="WorkerService\**" />
-    <EmbeddedResource Remove="WorkerService\**" />
-    <None Remove="WorkerService\**" />
-  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="3.1.8" />

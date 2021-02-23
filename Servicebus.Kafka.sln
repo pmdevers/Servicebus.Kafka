@@ -11,6 +11,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{E1C9A5FA-B
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Servicebus.Kafka.Test", "test\Servicebus.Kafka.Test\Servicebus.Kafka.Test.csproj", "{18F9CB76-7042-44C6-AD60-76DB93387456}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "samples", "samples", "{4BA167C9-220F-4FF3-B046-A217CD25A912}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WorkerService", "samples\WorkerService\WorkerService.csproj", "{40ED519D-D89C-4373-9DAE-2A383A6ADF40}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -25,6 +29,10 @@ Global
 		{18F9CB76-7042-44C6-AD60-76DB93387456}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{18F9CB76-7042-44C6-AD60-76DB93387456}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{18F9CB76-7042-44C6-AD60-76DB93387456}.Release|Any CPU.Build.0 = Release|Any CPU
+		{40ED519D-D89C-4373-9DAE-2A383A6ADF40}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{40ED519D-D89C-4373-9DAE-2A383A6ADF40}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{40ED519D-D89C-4373-9DAE-2A383A6ADF40}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{40ED519D-D89C-4373-9DAE-2A383A6ADF40}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -32,6 +40,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{6B12ADF4-530B-4414-8100-07ED75311910} = {696151D0-4B6A-4562-A174-B5E015BE4383}
 		{18F9CB76-7042-44C6-AD60-76DB93387456} = {E1C9A5FA-BD60-49FE-A11D-E0D68F30354E}
+		{40ED519D-D89C-4373-9DAE-2A383A6ADF40} = {4BA167C9-220F-4FF3-B046-A217CD25A912}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {43E34585-D4F0-4598-864D-3D8FA3FC6361}

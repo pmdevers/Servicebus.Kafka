@@ -51,9 +51,10 @@ namespace Servicebus.Kafka.Test
 
             services.AddServiceBus()
                 .AddEventHandler<TestEvent, TestEventHandler>();
-
-            services.AddServiceBusKafka(new ConsumerConfig(),
-                new SchemaRegistryConfig());
+         
+            services.AddServiceBusKafka(
+               new ConsumerConfig() { BootstrapServers = "http://10.107.126.142:9094", GroupId = GetType().Assembly.GetName().Name},
+               new SchemaRegistryConfig() {Url = "http://10.101.16.135:8081" });
 
             var provider = services.BuildServiceProvider();
 

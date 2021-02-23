@@ -28,8 +28,7 @@ namespace Servicebus.Kafka
 
             foreach(var consumer in consumers)
             {
-                new Thread(() => consumer.StartConsuming(_provider, cancellationToken))
-                    .Start();
+               Task.Run(() => new TopicConsumer(_provider, _services).HandleTopicAsync(consumer, cancellationToken));
             }
 
             return Task.CompletedTask;
@@ -37,24 +36,20 @@ namespace Servicebus.Kafka
 
         public Task StopAsync(CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            return Task.CompletedTask;
         }
 
-        private IEnumerable<ITopicEventConsumer> GetTopicConsumers()
+        private IEnumerable<string> GetTopicConsumers()
         {
-            var service = _services
+            var topics = _services
                 .Where(s =>
                     s.ServiceType.IsGenericType &&
                     s.ServiceType.GetGenericTypeDefinition() == typeof(IEventHandler<>))
                 .Select(s => s.ServiceType.GetGenericArguments()[0])
-                .Where(x => x.GetCustomAttribute<KafkaTopic>() != null)
+                .Select(x => x.GetCustomAttribute<KafkaTopic>().TopicName)
                 .Distinct();
 
-            var consumers = service.Select(eventType =>
-                (ITopicEventConsumer)Activator.CreateInstance(
-                    typeof(TopicEventConsumer<>).MakeGenericType(eventType)));
-
-            return consumers;
+            return topics;
         }
     }
 }

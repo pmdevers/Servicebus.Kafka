@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk.Worker">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <UserSecretsId>dotnet-WorkerService-E1926705-8E22-4355-B576-1C63BB5C14E9</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="WorkerService\**" />
+    <Content Remove="WorkerService\**" />
+    <EmbeddedResource Remove="WorkerService\**" />
+    <None Remove="WorkerService\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="3.1.8" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\Servicebus.Kafka.csproj" />
+  </ItemGroup>
+</Project>

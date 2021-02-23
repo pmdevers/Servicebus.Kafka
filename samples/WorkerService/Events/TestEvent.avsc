@@ -1,0 +1,16 @@
+﻿{ 
+ "namespace": "WorkerService.Events",
+ "type": "record",
+ "name": "TestEvent",
+ "fields": [
+     {"name": "Name", "type": "string"},
+     {"name": "FavoriteNumber",  "type": ["int", "null"]},
+     {"name": "FavoriteColor", "type": ["string", "null"]},
+     {"name": "HourlyRate", "type": {
+        "type": "bytes",
+        "logicalType": "decimal",
+        "precision": 4,
+        "scale": 2
+     }}
+ ]
+}

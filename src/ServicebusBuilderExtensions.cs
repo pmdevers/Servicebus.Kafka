@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Confluent.Kafka;
 using Confluent.SchemaRegistry;
+using Confluent.SchemaRegistry.Serdes;
 using Microsoft.Extensions.DependencyInjection;
 using PMDEvers.Servicebus;
 
@@ -24,7 +25,8 @@ namespace Servicebus.Kafka
             services.AddSingleton(consumerConfig);
             services.AddSingleton(schemaRegistryConfig);
             services.AddHostedService(s => new KafkaBackgroundWorker(services, s));
-
+            services.AddTransient(typeof(AvroEventHandler<>));
+            
             return services;
         }
     }

@@ -68,13 +68,22 @@ namespace Servicebus.Kafka.Test
                     s.ServiceType.IsGenericType &&
                     s.ServiceType.GetGenericTypeDefinition() == typeof(IEventHandler<>))
                 .Select(s=> s.ServiceType.GetGenericArguments()[0])
-                .Where(x=> x.GetCustomAttribute<KafkaTopic>() != null)
+                .Where(x=> x.GetCustomAttribute<KafkaTopic>().TopicName == "")
                 .Distinct();
+           
 
-             var consumers = service.Select(eventType =>
-                (ITopicEventConsumer) Activator.CreateInstance(
-                    typeof(TopicEventConsumer<>).MakeGenericType(eventType)));
-            
+            var getTopics = services
+               .Where(s => 
+                  s.ServiceType.IsGenericType &&
+                  s.ServiceType.GetGenericTypeDefinition() == typeof(IEventHandler<>))
+               .Select(s=> s.ServiceType.GetGenericArguments()[0])
+               .Select(x=> x.GetCustomAttribute<KafkaTopic>())
+               .Select(x=> x.TopicName)
+               .Distinct();
+
+
+
+
         }
     }
 }

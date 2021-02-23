@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -36,8 +37,8 @@ namespace Servicebus.Kafka
          var types = GetTypes(topic);
 
          using var schemaRegistry = new CachedSchemaRegistryClient(_schemaRegistryConfig);
-         using var consumer = new ConsumerBuilder<int, GenericRecord>(_consumerConfig)
-            .SetKeyDeserializer(new AvroDeserializer<int>(schemaRegistry).AsSyncOverAsync())
+         using var consumer = new ConsumerBuilder<string, GenericRecord>(_consumerConfig)
+            .SetKeyDeserializer(new AvroDeserializer<string>(schemaRegistry).AsSyncOverAsync())
             .SetValueDeserializer(new AvroDeserializer<GenericRecord>(schemaRegistry).AsSyncOverAsync())
             .SetErrorHandler((_, e) => Console.WriteLine($"Error: {e.Reason}"))
             .Build();
@@ -62,7 +63,7 @@ namespace Servicebus.Kafka
                }
                catch (ConsumeException ex)
                {
-
+                  Debug.WriteLine(ex.Error.Reason);
                }
             }
          }  catch (OperationCanceledException)

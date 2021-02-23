@@ -17,7 +17,7 @@ namespace WorkerService.Events
 	using Avro;
 	using Avro.Specific;
 	
-   [KafkaTopic("Test")]
+   [KafkaTopic("Test"), Produce]
 	public partial class UserUpdated : ISpecificRecord, IEvent
    {
 		public static Schema _SCHEMA = Avro.Schema.Parse("{\"type\":\"record\",\"name\":\"UserUpdated\",\"namespace\":\"WorkerService.Events\",\"fields\"" +

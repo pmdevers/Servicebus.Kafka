@@ -25,10 +25,12 @@ namespace WorkerService
               .ConfigureServices((hostContext, services) =>
               {
                  services.AddHostedService<Worker>();
-                 services.AddHostedService<Worker1>();
+
                  services.AddServiceBus()
                     .AddEventHandler<TestEvent, TestEventHandler>()
-                    .AddEventHandler<UserUpdated, UpdateUserHandler>();
+                    .AddEventHandler<UserUpdated, UpdateUserHandler>()
+                    .ProduceEvent<UserUpdated>();
+
                   
                  services.AddServiceBusKafka(
                     new ConsumerConfig()
